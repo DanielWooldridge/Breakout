@@ -33,3 +33,12 @@ fire ball (green)
 
 # Time Details and Changelist
 <Add information to this section about the time you've taken for this task along with a professional changelist.>
+
+Time Spent: 10  Minutes
+Change: Bug Fix 
+Description: Took out a #include that was causing circular dependancy
+
+Time Spent: 1.5 Hours
+Change: Basic Particle Effects
+Description: Created a class that spawns in a certain amount of circles that show on the screen when a brick is destroyed
+

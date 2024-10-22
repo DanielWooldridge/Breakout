@@ -28,6 +28,15 @@ void BrickManager::render()
     for (auto& brick : _bricks) {
         brick.render(*_window);
     }
+
+    // Render the particles
+    _particleEffects.render(*_window);
+}
+
+void BrickManager::update(float dt)
+{
+    // Update particles
+    _particleEffects.update(dt);
 }
 
 int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
@@ -45,6 +54,10 @@ int BrickManager::checkCollision(sf::CircleShape& ball, sf::Vector2f& direction)
         if (ballY > brickBounds.top && ballY < brickBounds.top + brickBounds.height)
             // unless it's horizontal (collision from side)
             collisionResponse = 1;
+            
+        // *** Spawn particle effect at the brick's position ***
+        sf::Vector2f brickCenter(brickBounds.left + brickBounds.width / 2, brickBounds.top + brickBounds.height / 2);
+        _particleEffects.CreateParticles(brickCenter, 5);  // Spawn 50 particles at the brick's center
 
         // Mark the brick as destroyed (for simplicity, let's just remove it from rendering)
         // In a complete implementation, you would set an _isDestroyed flag or remove it from the vector

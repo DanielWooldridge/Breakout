@@ -84,6 +84,7 @@ void GameManager::update(float dt)
     // update everything 
     _paddle->update(dt);
     _ball->update(dt);
+    _brickManager->update(dt); 
     _powerupManager->update(dt);
 }
 
