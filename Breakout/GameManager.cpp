@@ -20,7 +20,7 @@ void GameManager::initialize()
     _paddle = new Paddle(_window);
     _brickManager = new BrickManager(_window, this);
     _messagingSystem = new MessagingSystem(_window);
-    _ball = new Ball(_window, 400.0f, this); 
+    _ball = new Ball(_window, 400.0f, this, _paddle); 
     _powerupManager = new PowerupManager(_window, _paddle, _ball);
     _ui = new UI(_window, _lives, this);
 

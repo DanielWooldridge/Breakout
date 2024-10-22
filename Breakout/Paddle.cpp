@@ -2,7 +2,8 @@
 #include <iostream>
 
 Paddle::Paddle(sf::RenderWindow* window)
-    : _window(window), _width(PADDLE_WIDTH), _timeInNewSize(0.0f), _isAlive(true)
+    : _window(window), _width(PADDLE_WIDTH), _timeInNewSize(0.0f), _isAlive(true), _hit(false), _comeback(false),
+    _hitTimer(0.25f), _comebackTimer(0.25f)
 {
     _sprite.setFillColor(sf::Color::Cyan);
     _sprite.setPosition((window->getSize().x - _width) / 2.0f, window->getSize().y - 50.0f);
@@ -43,6 +44,34 @@ void Paddle::update(float dt)
     {
         setWidth(1.0f, 0.0f); // Reset to default width after duration
     }
+
+
+    if (_hit)
+    {
+        _sprite.move(sf::Vector2f(0, dt*100));
+
+        _hitTimer -= dt;
+
+        if (_hitTimer <= 0)
+        {
+            _hitTimer = 0;
+            _hit = false;
+            _comeback = true;
+        }
+    }
+
+    if (_comeback)
+    {
+        _sprite.move(sf::Vector2f(0, dt * -100));
+
+        _comebackTimer -= dt;
+
+        if (_comebackTimer <= 0)
+        {
+            _comebackTimer = 0;
+            _comeback = false;
+        }
+    }
 }
 
 void Paddle::render()
@@ -64,4 +93,16 @@ void Paddle::setWidth(float coeff, float duration)
     _timeInNewSize = duration;
     float newX = _sprite.getPosition().x + (_width - PADDLE_WIDTH) / 2;
     _sprite.setPosition(newX, _sprite.getPosition().y);
+}
+
+void Paddle::paddleHit()
+{
+    // Reset if not already in moving state
+    if (!_hit && !_comeback) 
+    {
+        _hit = true;
+        _comeback = false;
+        _hitTimer = 0.25f;
+        _comebackTimer = 0.25f;
+    }
 }

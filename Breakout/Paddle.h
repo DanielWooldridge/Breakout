@@ -16,9 +16,14 @@ public:
     sf::FloatRect getBounds() const;
     void setWidth(float coeff, float duration);
 
+    void paddleHit();
+
 private:
 
-
+    bool _hit;
+    bool _comeback;
+    float _hitTimer;
+    float _comebackTimer;
     sf::RenderWindow* _window;
     sf::RectangleShape _sprite;
     float _width = PADDLE_WIDTH;

@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <vector>
+#include "Paddle.h"
 
 class GameManager;  // forward declaration
 
@@ -8,12 +9,13 @@ class GameManager;  // forward declaration
 
 class Ball {
 public:
-    Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager);
+    Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager, Paddle* paddle);
     ~Ball();
     void update(float dt);
     void render();
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
+
 
 private:
     sf::CircleShape _sprite;
@@ -23,7 +25,7 @@ private:
     bool _isAlive;
     bool _isFireBall;
     float _timeWithPowerupEffect;
-
+    Paddle* _paddle;
     GameManager* _gameManager;  // Reference to the GameManager
 
 

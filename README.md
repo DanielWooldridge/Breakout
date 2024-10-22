@@ -42,3 +42,7 @@ Time Spent: 1.5 Hours
 Change: Basic Particle Effects
 Description: Created a class that spawns in a certain amount of circles that show on the screen when a brick is destroyed
 
+Time Spent: 1.5 Hours
+Change: Responsive Paddle 
+Description: Paddle now moves down and comes back up when hitting the ball to make it feel responsive
+

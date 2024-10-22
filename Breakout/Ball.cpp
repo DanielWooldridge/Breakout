@@ -1,9 +1,9 @@
 #include "Ball.h"
 #include "GameManager.h" // avoid cicular dependencies
 
-Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
-    : _window(window), _velocity(velocity), _gameManager(gameManager),
-    _timeWithPowerupEffect(0.f), _isFireBall(false), _isAlive(true), _direction({1,1})
+Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager, Paddle* paddle)
+    : _window(window), _velocity(velocity), _gameManager(gameManager), 
+    _timeWithPowerupEffect(0.f), _isFireBall(false), _isAlive(true), _direction({1,1}), _paddle(paddle)
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
@@ -77,6 +77,7 @@ void Ball::update(float dt)
 
         // Adjust position to avoid getting stuck inside the paddle
         _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
+        _paddle->paddleHit();
     }
 
     // collision with bricks
@@ -94,6 +95,7 @@ void Ball::update(float dt)
 
 void Ball::render()
 {
+
     _window->draw(_sprite);
 }
 
@@ -114,3 +116,5 @@ void Ball::setFireBall(float duration)
     _isFireBall = false;
     _timeWithPowerupEffect = 0.f;    
 }
+
+
