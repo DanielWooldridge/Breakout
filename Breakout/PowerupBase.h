@@ -6,7 +6,7 @@
 #include "Ball.h"
 #include <vector>
 
-#include "PowerupFireBall.h"
+
 
 
 class PowerupBase
